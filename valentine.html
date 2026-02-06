@@ -3,23 +3,53 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FFB6C1">
+    <title>Will You Be Mine? 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="valentine_styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Will you be my Valentine?</h1>
-        <div class="buttons">
-            <button class="yes-button" onclick="handleYesClick()">Yes</button>
-            <button class="no-button" onclick="handleNoClick()">No</button>
-        </div>
-        <div class="gif_container">
-            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif"
-                alt="Cute GIF">
-        </div>
+    <!-- Floating hearts background -->
+    <div class="hearts-container">
+        <div class="heart heart-1">💕</div>
+        <div class="heart heart-2">💖</div>
+        <div class="heart heart-3">💗</div>
+        <div class="heart heart-4">💝</div>
+        <div class="heart heart-5">💓</div>
+        <div class="heart heart-6">💕</div>
+        <div class="heart heart-7">💖</div>
+        <div class="heart heart-8">💗</div>
     </div>
+
+    <!-- Confetti container -->
+    <div id="confetti-container"></div>
+
+    <div class="container">
+        <h1 class="question fade-in">Will you be mine?</h1>
+
+        <div class="character-container">
+            <div id="character-img" class="dog-emoji character bounce">🐶</div>
+            <!-- Floating hearts around the dog -->
+            <div class="dog-heart dog-heart-1">💕</div>
+            <div class="dog-heart dog-heart-2">💖</div>
+            <div class="dog-heart dog-heart-3">💗</div>
+            <div class="dog-heart dog-heart-4">💝</div>
+        </div>
+
+        <div class="buttons">
+            <button class="yes-button pulse-heart" id="yes-btn">Yes! 💕</button>
+            <button class="no-button" id="no-btn">No</button>
+        </div>
+
+        <p class="hint fade-in-delay">Choose wisely... 😊</p>
+    </div>
+
     <script src="valentine_script.js"></script>
 </body>
 

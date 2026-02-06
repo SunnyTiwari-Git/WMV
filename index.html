@@ -3,26 +3,52 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FFB6C1">
     <title>For You, Rizza 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <!-- Floating hearts background -->
+    <div class="hearts-container">
+        <div class="heart heart-1">💕</div>
+        <div class="heart heart-2">💖</div>
+        <div class="heart heart-3">💗</div>
+        <div class="heart heart-4">💝</div>
+        <div class="heart heart-5">💓</div>
+        <div class="heart heart-6">💕</div>
+        <div class="heart heart-7">💖</div>
+        <div class="heart heart-8">💗</div>
+    </div>
+
+    <!-- Particle canvas -->
+    <canvas id="particles"></canvas>
+
     <div class="container">
         <div class="message-container">
-            <h1>This is for you</h1>
-            <h2 class="name">Rizza</h2>
-            <p class="subtitle">Something special awaits... ✨</p>
+            <h1 class="fade-in">This is for you</h1>
+            <h2 class="name glow">Rizza</h2>
+            <p class="subtitle fade-in-delay">Something special awaits... ✨</p>
         </div>
 
-        <div class="gif_container">
-            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW5lenZyZHI5OXM2eW95b3pmMG40cWVrMDhtNjVuM3A4dGNxa2g2dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/VM1fcpu2bKs1e2Kdbj/giphy.gif"
-                alt="Cute GIF">
+        <div class="character-container">
+            <div class="dog-emoji">🐶</div>
+            <!-- Floating hearts around the dog -->
+            <div class="dog-heart dog-heart-1">💕</div>
+            <div class="dog-heart dog-heart-2">💖</div>
+            <div class="dog-heart dog-heart-3">💗</div>
+            <div class="dog-heart dog-heart-4">💝</div>
+            <div class="dog-heart dog-heart-5">💓</div>
         </div>
 
         <div class="swipe-indicator">
-            <p class="swipe-text">Swipe up to continue</p>
+            <p class="swipe-text pulse">Swipe up to continue</p>
             <div class="arrows">
                 <div class="arrow arrow-1">↑</div>
                 <div class="arrow arrow-2">↑</div>
@@ -30,6 +56,7 @@
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 
