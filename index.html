@@ -3,61 +3,245 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#FFB6C1">
-    <title>For You, Rizza 💕</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Daily Adventure 💕</title>
+    <link rel="stylesheet" href="tracker_styles.css">
+    <style>
+        /* Homepage specific styles */
+        .homepage-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .hero-card {
+            background: rgba(42, 42, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .couple-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .swipe-indicator {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .swipe-hint {
+            font-size: 0.9rem;
+            color: #FF6B9D;
+            margin-bottom: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: #FF6B9D;
+            animation: bounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px #FF6B9D);
+        }
+
+        .arrow-up {
+            animation-delay: 0s;
+        }
+
+        .arrow-down {
+            animation-delay: 0.5s;
+        }
+
+        .arrow-left {
+            animation-delay: 1s;
+        }
+
+        .arrow-right {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .swipe-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 10px;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .hero-card {
+                padding: 40px 30px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .couple-emoji {
+                font-size: 60px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Floating hearts background -->
-    <div class="hearts-container">
-        <div class="heart heart-1">💕</div>
-        <div class="heart heart-2">💖</div>
-        <div class="heart heart-3">💗</div>
-        <div class="heart heart-4">💝</div>
-        <div class="heart heart-5">💓</div>
-        <div class="heart heart-6">💕</div>
-        <div class="heart heart-7">💖</div>
-        <div class="heart heart-8">💗</div>
-    </div>
+    <!-- Neon hearts background -->
+    <div class="hearts-background"></div>
 
-    <!-- Particle canvas -->
-    <canvas id="particles"></canvas>
+    <!-- Homepage content -->
+    <div class="homepage-container">
+        <div class="hero-card">
+            <div class="couple-emoji">💑</div>
+            <h1 class="hero-title">Our Daily Adventure 💕</h1>
+            <p class="hero-subtitle">
+                Keeping our love strong, one day at a time.<br>
+                Building memories together, every single day.
+            </p>
 
-    <div class="container">
-        <div class="message-container">
-            <h1 class="fade-in">This is for you</h1>
-            <h2 class="name glow">Rizza</h2>
-            <p class="subtitle fade-in-delay">Something special awaits... ✨</p>
-        </div>
+            <div class="swipe-hint">✨ Swipe to begin ✨</div>
 
-        <div class="character-container">
-            <div class="dog-emoji">🐶</div>
-            <!-- Floating hearts around the dog -->
-            <div class="dog-heart dog-heart-1">💕</div>
-            <div class="dog-heart dog-heart-2">💖</div>
-            <div class="dog-heart dog-heart-3">💗</div>
-            <div class="dog-heart dog-heart-4">💝</div>
-            <div class="dog-heart dog-heart-5">💓</div>
-        </div>
-
-        <div class="swipe-indicator">
-            <p class="swipe-text pulse">Swipe up to continue</p>
-            <div class="arrows">
-                <div class="arrow arrow-1">↑</div>
-                <div class="arrow arrow-2">↑</div>
-                <div class="arrow arrow-3">↑</div>
+            <div class="swipe-indicator">
+                <span class="arrow arrow-up">↑</span>
+                <span class="arrow arrow-down">↓</span>
+                <span class="arrow arrow-left">←</span>
+                <span class="arrow arrow-right">→</span>
             </div>
+
+            <p class="swipe-text">Swipe in any direction</p>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="tracker_script.js"></script>
+    <script>
+        // Swipe gesture detection
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+
+        const minSwipeDistance = 50; // Minimum distance for a swipe
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        // Mouse support for desktop testing
+        let mouseDown = false;
+        let mouseStartX = 0;
+        let mouseStartY = 0;
+
+        document.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            mouseStartX = e.screenX;
+            mouseStartY = e.screenY;
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (mouseDown) {
+                touchStartX = mouseStartX;
+                touchStartY = mouseStartY;
+                touchEndX = e.screenX;
+                touchEndY = e.screenY;
+                handleSwipe();
+                mouseDown = false;
+            }
+        });
+
+        function handleSwipe() {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            const absDeltaX = Math.abs(deltaX);
+            const absDeltaY = Math.abs(deltaY);
+
+            // Check if swipe distance is sufficient
+            if (absDeltaX > minSwipeDistance || absDeltaY > minSwipeDistance) {
+                // Navigate to tracker page on any swipe
+                window.location.href = 'tracker.html';
+            }
+        }
+
+        // Initialize neon hearts
+        if (typeof createFloatingHearts === 'function') {
+            createFloatingHearts();
+        }
+    </script>
 </body>
 
 </html>
