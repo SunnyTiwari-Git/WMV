@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Private</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="vault-page">
+
+  <!-- ambient orbs -->
+  <div class="vault-orb vault-orb-1"></div>
+  <div class="vault-orb vault-orb-2"></div>
+
+  <div class="vault-card">
+
+    <!-- lock icon -->
+    <div class="vault-lock" id="lockIcon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           style="color:#FF6B9D">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+
+    <h1 class="vault-title">Our Private Space</h1>
+    <p class="vault-sub">Enter your passcode to continue</p>
+
+    <!-- PIN inputs -->
+    <div class="pin-inputs" id="pinInputs">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off">
+    </div>
+
+    <p class="vault-error" id="vaultError"></p>
+
+    <button class="vault-btn" id="vaultSubmit">Unlock</button>
+
+    <a href="index.html" class="vault-back">Go back home</a>
+
+  </div>
+
+  <script>
+  const CORRECT = '0420';
+
+  const inputs   = Array.from(document.querySelectorAll('.pin-digit'));
+  const pinWrap  = document.getElementById('pinInputs');
+  const errorEl  = document.getElementById('vaultError');
+  const submitEl = document.getElementById('vaultSubmit');
+  const lockEl   = document.getElementById('lockIcon');
+
+  /* auto-advance and backspace */
+  inputs.forEach((inp, i) => {
+    inp.addEventListener('input', () => {
+      inp.value = inp.value.replace(/[^0-9]/g, '').slice(-1);
+      if (inp.value) {
+        inp.classList.add('filled');
+        if (i < inputs.length - 1) inputs[i + 1].focus();
+        else checkPin();
+      }
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Backspace' && !inp.value && i > 0) {
+        inputs[i - 1].value = '';
+        inputs[i - 1].classList.remove('filled');
+        inputs[i - 1].focus();
+      }
+    });
+    inp.addEventListener('paste', e => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'');
+      [...text].slice(0, 4).forEach((ch, j) => {
+        if (inputs[j]) { inputs[j].value = ch; inputs[j].classList.add('filled'); }
+      });
+      const last = Math.min(text.length, 4) - 1;
+      if (inputs[last]) inputs[last].focus();
+      checkPin();
+    });
+  });
+
+  submitEl.addEventListener('click', checkPin);
+
+  function getPin() { return inputs.map(i => i.value).join(''); }
+
+  function checkPin() {
+    const pin = getPin();
+    if (pin.length < 4) return;
+    if (pin === CORRECT) {
+      /* success */
+      sessionStorage.setItem('vault_auth', '1');
+      lockEl.style.borderColor = '#A8E6CF';
+      lockEl.style.background  = 'rgba(168,230,207,.15)';
+      lockEl.querySelector('svg').style.color = '#A8E6CF';
+      errorEl.textContent = '';
+      submitEl.textContent = 'Unlocking...';
+      submitEl.style.opacity = '.7';
+      setTimeout(() => { window.location.href = 'vault-content.html'; }, 600);
+    } else {
+      /* wrong */
+      pinWrap.classList.add('shake');
+      errorEl.textContent = 'Incorrect passcode. Try again.';
+      setTimeout(() => {
+        pinWrap.classList.remove('shake');
+        inputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+        inputs[0].focus();
+      }, 550);
+    }
+  }
+
+  /* focus first on load */
+  inputs[0].focus();
+  </script>
+
+</body>
+</html>

@@ -28,8 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('activityEmoji').textContent = activity.emoji;
         document.getElementById('activityTitle').textContent = activity.title;
         document.getElementById('activityDescription').textContent = activity.description;
-        document.getElementById('activityTime').textContent = activity.time;
-        document.getElementById('activityDifficulty').textContent = activity.difficulty;
+        const timeEl = document.getElementById('activityTime');
+        timeEl.textContent = '⏱️ ' + activity.time;
+
+        const diffEl = document.getElementById('activityDifficulty');
+        diffEl.textContent = '📊 ' + activity.difficulty;
+        diffEl.className = 'chip ' + (activity.difficulty || '').toLowerCase();
 
         // Update materials list
         const materialsList = document.getElementById('materialsList');
@@ -249,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const completed = JSON.parse(localStorage.getItem('completedActivities') || '[]');
 
         if (completed.length === 0) {
-            historyList.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">No activities completed yet. Start your journey today! 💕</p>';
+            historyList.innerHTML = '<div class="hist-empty"><span>💕</span><p>No adventures completed yet.<br>Start your journey today!</p></div>';
         } else {
             historyList.innerHTML = '';
 
@@ -269,22 +273,14 @@ document.addEventListener('DOMContentLoaded', function () {
             // Display completed activities
             allActivities.forEach(activity => {
                 const item = document.createElement('div');
-                item.style.cssText = `
-                background: rgba(255, 182, 193, 0.2);
-                border-radius: 15px;
-                padding: 15px;
-                margin-bottom: 15px;
-                border-left: 4px solid #FF69B4;
-            `;
+                item.className = 'hist-item';
                 item.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                    <span style="font-size: 1.5em;">${activity.emoji}</span>
-                    <strong style="color: #FF1493; font-size: 1.1em;">${activity.title}</strong>
-                </div>
-                <p style="color: #666; font-size: 0.9em; margin: 0;">
-                    ${activity.day} • ${activity.time} • ${activity.difficulty}
-                </p>
-            `;
+                    <span class="hist-item-emoji">${activity.emoji}</span>
+                    <div>
+                        <h4>${activity.title}</h4>
+                        <p>${activity.day} &nbsp;·&nbsp; ${activity.time} &nbsp;·&nbsp; ${activity.difficulty}</p>
+                    </div>
+                `;
                 historyList.appendChild(item);
             });
         }

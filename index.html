@@ -1,247 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Daily Adventure 💕</title>
-    <link rel="stylesheet" href="tracker_styles.css">
-    <style>
-        /* Homepage specific styles */
-        .homepage-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .hero-card {
-            background: rgba(42, 42, 42, 0.7);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 60px 40px;
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-            border: 1px solid rgba(255, 107, 157, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            position: relative;
-            z-index: 2;
-        }
-
-        .couple-emoji {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .swipe-indicator {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        .swipe-hint {
-            font-size: 0.9rem;
-            color: #FF6B9D;
-            margin-bottom: 15px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .arrow {
-            font-size: 30px;
-            color: #FF6B9D;
-            animation: bounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 5px #FF6B9D);
-        }
-
-        .arrow-up {
-            animation-delay: 0s;
-        }
-
-        .arrow-down {
-            animation-delay: 0.5s;
-        }
-
-        .arrow-left {
-            animation-delay: 1s;
-        }
-
-        .arrow-right {
-            animation-delay: 1.5s;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-        }
-
-        .swipe-text {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 10px;
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 768px) {
-            .hero-card {
-                padding: 40px 30px;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .couple-emoji {
-                font-size: 60px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080812">
+  <title>Sudhanshu &amp; Rizza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
+<body class="home-page">
 
-<body>
-    <!-- Neon hearts background -->
-    <div class="hearts-background"></div>
+  <!-- scroll progress bar -->
+  <div id="scrollProgress"></div>
 
-    <!-- Homepage content -->
-    <div class="homepage-container">
-        <div class="hero-card">
-            <div class="couple-emoji">💑</div>
-            <h1 class="hero-title">Our Daily Adventure 💕</h1>
-            <p class="hero-subtitle">
-                Keeping our love strong, one day at a time.<br>
-                Building memories together, every single day.
-            </p>
+  <!-- aurora background -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+    <div class="aurora-orb aurora-orb-4"></div>
+  </div>
 
-            <div class="swipe-hint">✨ Swipe to begin ✨</div>
+  <!-- cursor glow -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-            <div class="swipe-indicator">
-                <span class="arrow arrow-up">↑</span>
-                <span class="arrow arrow-down">↓</span>
-                <span class="arrow arrow-left">←</span>
-                <span class="arrow arrow-right">→</span>
-            </div>
+  <!-- ════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero-section" id="hero">
 
-            <p class="swipe-text">Swipe in any direction</p>
-        </div>
+    <!-- animated blurred orbs -->
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <!-- heartbeat ripple accents -->
+    <div class="hb-heart-wrap" aria-hidden="true">
+      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
+      <div class="hb-heart">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--pink)" stroke="none"/></svg>
+      </div>
+    </div>
+    <div class="hb-heart-wrap" aria-hidden="true">
+      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
+      <div class="hb-heart">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--purple)" stroke="none"/></svg>
+      </div>
+    </div>
+    <div class="hb-heart-wrap" aria-hidden="true">
+      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
+      <div class="hb-heart">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--teal)" stroke="none"/></svg>
+      </div>
+    </div>
+    <div class="hb-heart-wrap" aria-hidden="true">
+      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
+      <div class="hb-heart">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--pink)" stroke="none"/></svg>
+      </div>
     </div>
 
-    <script src="tracker_script.js"></script>
-    <script>
-        // Swipe gesture detection
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchEndX = 0;
-        let touchEndY = 0;
+    <!-- pulsing rings -->
+    <div class="hero-rings" aria-hidden="true">
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+    </div>
 
-        const minSwipeDistance = 50; // Minimum distance for a swipe
+    <!-- text content -->
+    <div class="hero-text">
+      <span class="hero-badge">Our Love Story</span>
+      <h1 class="hero-title" id="heroTitle" style="cursor:default;user-select:none;">Sudhanshu &amp; Rizza</h1>
+      <p class="hero-sub">Every single day with you is our greatest adventure.<br>This little corner of the internet is just for us.</p>
+      <div class="hero-btns">
+        <a href="tracker.html" class="btn btn-pink">Start Today's Adventure</a>
+        <a href="#story"       class="btn btn-outline">Our Story</a>
+      </div>
+    </div>
 
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        });
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint-arrow">&#8595;</span>
+      <span>Scroll to explore</span>
+    </div>
 
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
-        });
+  </section>
 
-        // Mouse support for desktop testing
-        let mouseDown = false;
-        let mouseStartX = 0;
-        let mouseStartY = 0;
+  <!-- ════════════════════════════════════
+       OUR STORY — TIMELINE
+  ═══════════════════════════════════════ -->
+  <section id="story" class="story-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Chapter One</div>
+        <h2 class="section-title">Our Story</h2>
+        <p class="section-sub">Every great love story starts with a single moment. Here is ours.</p>
+        <div class="section-divider"></div>
+      </div>
 
-        document.addEventListener('mousedown', (e) => {
-            mouseDown = true;
-            mouseStartX = e.screenX;
-            mouseStartY = e.screenY;
-        });
+      <div class="timeline">
 
-        document.addEventListener('mouseup', (e) => {
-            if (mouseDown) {
-                touchStartX = mouseStartX;
-                touchStartY = mouseStartY;
-                touchEndX = e.screenX;
-                touchEndY = e.screenY;
-                handleSwipe();
-                mouseDown = false;
-            }
-        });
+        <div class="timeline-fill" id="timelineFill"></div>
 
-        function handleSwipe() {
-            const deltaX = touchEndX - touchStartX;
-            const deltaY = touchEndY - touchStartY;
-            const absDeltaX = Math.abs(deltaX);
-            const absDeltaY = Math.abs(deltaY);
+        <div class="tl-item">
+          <div class="tl-dot">01</div>
+          <div class="tl-card">
+            <p class="tl-date">The Beginning</p>
+            <h3>First Hello</h3>
+            <p>It started with a simple message — a tiny spark that would grow into something beautiful.</p>
+          </div>
+        </div>
 
-            // Check if swipe distance is sufficient
-            if (absDeltaX > minSwipeDistance || absDeltaY > minSwipeDistance) {
-                // Navigate to tracker page on any swipe
-                window.location.href = 'tracker.html';
-            }
+        <div class="tl-item">
+          <div class="tl-dot">02</div>
+          <div class="tl-card">
+            <p class="tl-date">Getting Closer</p>
+            <h3>First Call</h3>
+            <p>Hearing each other's voice for the first time. Hours flew by like minutes. We could not stop talking.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot">03</div>
+          <div class="tl-card">
+            <p class="tl-date">Face to Face</p>
+            <h3>First Video Date</h3>
+            <p>Seeing each other's smile through a screen. The distance felt a little smaller that night.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot">04</div>
+          <div class="tl-card">
+            <p class="tl-date">Making It Official</p>
+            <h3>Together at Last</h3>
+            <p>We decided — this is real, this is us. The moment we chose each other, every day.</p>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot">05</div>
+          <div class="tl-card">
+            <p class="tl-date">Now &amp; Always</p>
+            <h3>Every Day Together</h3>
+            <p>Different timezones, one heart. We keep building our story one daily adventure at a time.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       PHOTO GALLERY
+  ═══════════════════════════════════════ -->
+  <section id="gallery" class="gallery-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Memories</div>
+        <h2 class="section-title">Our Photo Wall</h2>
+        <p class="section-sub">Moments frozen in time — every picture tells a piece of our story.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="polaroid-grid">
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/romance1/400/400" alt="Memory 1">
+          </div>
+          <p class="polaroid-caption">First Smile</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/evening2/400/400" alt="Memory 2">
+          </div>
+          <p class="polaroid-caption">Late Night Calls</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/nature3/400/400" alt="Memory 3">
+          </div>
+          <p class="polaroid-caption">Morning Vibes</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/sunset4/400/400" alt="Memory 4">
+          </div>
+          <p class="polaroid-caption">Golden Hour</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/stars5/400/400" alt="Memory 5">
+          </div>
+          <p class="polaroid-caption">Stargazing Together</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/bloom6/400/400" alt="Memory 6">
+          </div>
+          <p class="polaroid-caption">Us, Always</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/ocean7/400/400" alt="Memory 7">
+          </div>
+          <p class="polaroid-caption">Dreaming Big</p>
+        </div>
+
+        <div class="polaroid">
+          <div class="polaroid-img">
+            <img src="https://picsum.photos/seed/light8/400/400" alt="Memory 8">
+          </div>
+          <p class="polaroid-caption">Our Playlist</p>
+        </div>
+
+      </div>
+
+      <p class="gallery-note">Replace these with your favourite photos together!</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       MEMORIES CAROUSEL (auto-scroll)
+  ═══════════════════════════════════════ -->
+  <section id="carousel-section" class="carousel-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">A Glimpse of Us</div>
+        <h2 class="section-title">Moments We Cherish</h2>
+        <p class="section-sub">Our favourite memories, one frame at a time.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="carousel-outer">
+        <div class="carousel-wrap" id="carouselWrap"
+             aria-label="Memory slideshow">
+
+          <div class="carousel-track" id="carouselTrack">
+
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-a/1200/600" alt="Memory">
+              <div class="carousel-caption">Just the two of us</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-b/1200/600" alt="Memory">
+              <div class="carousel-caption">Golden afternoons</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-c/1200/600" alt="Memory">
+              <div class="carousel-caption">Every little detail</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-d/1200/600" alt="Memory">
+              <div class="carousel-caption">Far apart, close at heart</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-e/1200/600" alt="Memory">
+              <div class="carousel-caption">Quiet moments together</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-f/1200/600" alt="Memory">
+              <div class="carousel-caption">Counting the days</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-g/1200/600" alt="Memory">
+              <div class="carousel-caption">Worth every mile</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="https://picsum.photos/seed/mem-h/1200/600" alt="Memory">
+              <div class="carousel-caption">This is home</div>
+            </div>
+
+          </div><!-- /track -->
+
+          <!-- nav arrows -->
+          <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Previous">&#8592;</button>
+          <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Next">&#8594;</button>
+
+          <!-- progress bar -->
+          <div class="carousel-progress" id="carouselProgress"></div>
+
+        </div><!-- /wrap -->
+
+        <!-- dots -->
+        <div class="carousel-dots" id="carouselDots" role="tablist"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       LOVE STATS
+  ═══════════════════════════════════════ -->
+  <section id="stats" class="stats-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">By The Numbers</div>
+        <h2 class="section-title">Our Love In Numbers</h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <span class="stat-icon-img">
+            <img src="https://picsum.photos/seed/cal/80/80" alt="" aria-hidden="true">
+          </span>
+          <span class="stat-number" id="daysTogether">—</span>
+          <span class="stat-label">Days Together</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon-img">
+            <img src="https://picsum.photos/seed/fire/80/80" alt="" aria-hidden="true">
+          </span>
+          <span class="stat-number" id="homeStreak">0</span>
+          <span class="stat-label">Day Streak</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon-img">
+            <img src="https://picsum.photos/seed/star/80/80" alt="" aria-hidden="true">
+          </span>
+          <span class="stat-number" id="homeCompleted">0</span>
+          <span class="stat-label">Adventures Done</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon-img">
+            <img src="https://picsum.photos/seed/letter/80/80" alt="" aria-hidden="true">
+          </span>
+          <span class="stat-number">&#8734;</span>
+          <span class="stat-label">Reasons I Love You</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon-img">
+            <img src="https://picsum.photos/seed/clock/80/80" alt="" aria-hidden="true">
+          </span>
+          <span class="stat-number" id="hoursTogether">—</span>
+          <span class="stat-label">Hours of Calls</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-icon-img">
+            <img src="https://picsum.photos/seed/globe/80/80" alt="" aria-hidden="true">
+          </span>
+          <span class="stat-number">1</span>
+          <span class="stat-label">Heart Between Us</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       DAILY ADVENTURES CTA
+  ═══════════════════════════════════════ -->
+  <section id="adventures" class="adventures-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Every Day</div>
+        <h2 class="section-title">Daily Adventures</h2>
+        <p class="section-sub">A fresh activity every day — crafted to keep your bond strong across any distance.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="adventures-grid">
+
+        <div class="adv-card">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/talk/360/200" alt="Monday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day">Monday</span>
+            <h3>Deep Conversations</h3>
+            <p>20 Questions, voice marathons and future planning sessions.</p>
+          </div>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/art/360/200" alt="Tuesday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day">Tuesday</span>
+            <h3>Creative Together</h3>
+            <p>Draw each other, build playlists, go on a photo hunt.</p>
+          </div>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/books/360/200" alt="Wednesday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day">Wednesday</span>
+            <h3>Learn and Explore</h3>
+            <p>Documentaries, book clubs, and learning something new.</p>
+          </div>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/games/360/200" alt="Thursday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day">Thursday</span>
+            <h3>Game Night</h3>
+            <p>Gaming sessions, trivia battles, virtual escape rooms.</p>
+          </div>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/dinner/360/200" alt="Friday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day">Friday</span>
+            <h3>Date Night</h3>
+            <p>Virtual dinners, movie nights, and stargazing together.</p>
+          </div>
+        </div>
+
+        <div class="adv-card adv-card--special">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/letters/360/200" alt="Saturday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day adv-day--special">Special Saturday</span>
+            <h3>Deep Connection</h3>
+            <p>Love letters, photo exchanges, meditation and heartfelt rituals.</p>
+          </div>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-img-wrap">
+            <img src="https://picsum.photos/seed/morning/360/200" alt="Sunday">
+          </div>
+          <div class="adv-body">
+            <span class="adv-day">Sunday</span>
+            <h3>Reflect and Connect</h3>
+            <p>Gratitude rituals, weekly planning, and heartfelt check-ins.</p>
+          </div>
+        </div>
+
+        <div class="adv-card adv-card--cta">
+          <div class="adv-cta-inner">
+            <p class="adv-cta-num">27</p>
+            <p class="adv-cta-label">Activities ready to explore</p>
+            <a href="tracker.html" class="btn btn-pink btn-sm" style="margin-top:1rem;">Open Tracker</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       LOVE NOTES (chat bubbles)
+  ═══════════════════════════════════════ -->
+  <section id="notes" class="notes-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">Sweet Nothings</div>
+        <h2 class="section-title">Notes To Each Other</h2>
+        <p class="section-sub">The little things we say that mean everything.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="notes-wrap">
+
+        <div class="note-item from-me">
+          <div class="note-bubble">
+            <p class="note-text">"The distance is just a test to see how far love can travel — and ours travels every single second."</p>
+            <p class="note-author">Sudhanshu</p>
+          </div>
+        </div>
+
+        <div class="note-item from-you">
+          <div class="note-bubble">
+            <p class="note-text">"You make the miles feel like nothing. Counting down the days until I can finally hold your hand for real."</p>
+            <p class="note-author">Rizza</p>
+          </div>
+        </div>
+
+        <div class="note-item from-me">
+          <div class="note-bubble">
+            <p class="note-text">"Every goodnight feels temporary, because good morning with you is always right around the corner."</p>
+            <p class="note-author">Sudhanshu</p>
+          </div>
+        </div>
+
+        <div class="note-item from-you">
+          <div class="note-bubble">
+            <p class="note-text">"I carry your heart with me wherever I go. It is tucked right next to mine, always."</p>
+            <p class="note-author">Rizza</p>
+          </div>
+        </div>
+
+        <div class="note-item from-me">
+          <div class="note-bubble">
+            <p class="note-text">"Thank you for making every ordinary day feel extraordinary, even from across the world."</p>
+            <p class="note-author">Sudhanshu</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       OUR FAVOURITES — image cards
+  ═══════════════════════════════════════ -->
+  <section id="favourites" class="favorites-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-tag">All About Us</div>
+        <h2 class="section-title">Things We Love</h2>
+        <p class="section-sub">Little things that are uniquely, perfectly ours.</p>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="favorites-grid">
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/music/280/180" alt="Our Song">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Our Song</p>
+            <p class="fav-name">Our Playlist</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/pizza/280/180" alt="Food">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Favourite Food</p>
+            <p class="fav-name">Pizza Date Night</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/cinema/280/180" alt="Movie">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Favourite Movie</p>
+            <p class="fav-name">Our Comfort Film</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/night/280/180" alt="Night calls">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Best Time</p>
+            <p class="fav-name">Late Night Calls</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/reading/280/180" alt="Books">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Favourite Book</p>
+            <p class="fav-name">Reading Together</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/blossom/280/180" alt="Flowers">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Favourite Flower</p>
+            <p class="fav-name">Cherry Blossoms</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/coffee/280/180" alt="Coffee">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Morning Ritual</p>
+            <p class="fav-name">Coffee and Texts</p>
+          </div>
+        </div>
+
+        <div class="fav-card">
+          <div class="fav-img">
+            <img src="https://picsum.photos/seed/travel/280/180" alt="Dream">
+          </div>
+          <div class="fav-body">
+            <p class="fav-cat">Our Dream</p>
+            <p class="fav-name">Being Together</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <p class="footer-msg">Made with love, for us</p>
+    <p class="footer-sub">Keeping our love strong, one day at a time &nbsp;&middot;&nbsp; No matter the distance</p>
+    <nav class="footer-nav">
+      <a href="#hero">Home</a>
+      <a href="#story">Our Story</a>
+      <a href="#gallery">Memories</a>
+      <a href="tracker.html">Adventures</a>
+    </nav>
+    <p class="footer-copy">Sudhanshu &amp; Rizza &mdash; Our little corner of the internet</p>
+  </footer>
+
+  <!-- ════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════ -->
+  <script>
+  /* ── CONFIG ── */
+  const TOGETHER_SINCE     = new Date('2024-01-01');
+  const CALL_HOURS_PER_DAY = 1.5;
+  const VAULT_CLICKS       = 10;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    revealOnScroll();
+    updateStats();
+    startDaysCounter();
+    initCarousel();
+    initVaultTrigger();
+    initCursorGlow();
+    initMagneticButtons();
+    initTiltCards();
+    initScrollProgress();
+    initParallax();
+    initCharReveal();
+    initCardCascade();
+    initTimelineDraw();
+  });
+
+  /* ── SCROLL REVEALS ── */
+  function revealOnScroll() {
+    const targets = document.querySelectorAll('.tl-item,.polaroid,.stat-card,.adv-card,.note-item,.fav-card');
+
+    const io = new IntersectionObserver(entries => {
+      /* Group all currently-intersecting elements and stagger their delays */
+      const visible = entries.filter(e => e.isIntersecting);
+      visible.forEach((e, batchIdx) => {
+        /* 0.2 s base + 0.06 s per sibling in the same batch, capped at 0.5 s */
+        const delay = Math.min(200 + batchIdx * 60, 500);
+        e.target.style.transitionDelay = delay + 'ms';
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(t => io.observe(t));
+  }
+
+  /* ── STATS ── */
+  function updateStats() {
+    const streak    = parseInt(localStorage.getItem('currentStreak') || '0');
+    const completed = JSON.parse(localStorage.getItem('completedActivities') || '[]').length;
+    const el = id => document.getElementById(id);
+    if (el('homeStreak'))    el('homeStreak').textContent    = streak;
+    if (el('homeCompleted')) el('homeCompleted').textContent = completed;
+  }
+
+  /* ── DAYS COUNTER ── */
+  function startDaysCounter() {
+    const diff  = Math.max(0, Math.floor((Date.now() - TOGETHER_SINCE) / 86400000));
+    const hours = Math.floor(diff * CALL_HOURS_PER_DAY);
+    animateCount('daysTogether',  diff,  1200);
+    animateCount('hoursTogether', hours, 1500);
+  }
+  function animateCount(id, target, duration) {
+    const el = document.getElementById(id);
+    if (!el || target === 0) { if (el) el.textContent = target; return; }
+    let start = null;
+    const step = ts => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor(p * target).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver(en => { if (en[0].isIntersecting) { requestAnimationFrame(step); io.disconnect(); } }, { threshold:.3 });
+    io.observe(el);
+  }
+
+  /* ══════════════════════════════════════
+     CAROUSEL — auto-advances every 3 s
+  ════════════════════════════════════════ */
+  function initCarousel() {
+    const track    = document.getElementById('carouselTrack');
+    const wrap     = document.getElementById('carouselWrap');
+    const dotsEl   = document.getElementById('carouselDots');
+    const prevBtn  = document.getElementById('carouselPrev');
+    const nextBtn  = document.getElementById('carouselNext');
+    const progress = document.getElementById('carouselProgress');
+    if (!track) return;
+
+    const slides   = Array.from(track.querySelectorAll('.carousel-slide'));
+    const total    = slides.length;
+    let current    = 0;
+    let timer      = null;
+    let progTimer  = null;
+    const DELAY    = 3000;
+
+    /* build dots */
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dotsEl.children[current].classList.remove('active');
+      current = (n + total) % total;
+      slides[current].classList.add('active');
+      dotsEl.children[current].classList.add('active');
+      track.style.transform = `translateX(-${current * 100}%)`;
+      restartProgress();
+    }
+
+    function restartProgress() {
+      clearInterval(progTimer);
+      if (progress) {
+        progress.style.transition = 'none';
+        progress.style.width = '0%';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          progress.style.transition = `width ${DELAY}ms linear`;
+          progress.style.width = '100%';
+        }));
+      }
+    }
+
+    function startAuto() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), DELAY);
+    }
+    function stopAuto() { clearInterval(timer); }
+
+    /* init first slide */
+    slides[0].classList.add('active');
+    startAuto();
+    restartProgress();
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); stopAuto(); startAuto(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); stopAuto(); startAuto(); });
+
+    /* pause on hover */
+    wrap.addEventListener('mouseenter', stopAuto);
+    wrap.addEventListener('mouseleave', startAuto);
+
+    /* swipe support */
+    let tx = 0;
+    wrap.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
+    wrap.addEventListener('touchend',   e => {
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); stopAuto(); startAuto(); }
+    });
+  }
+
+  /* ══════════════════════════════════════
+     SECRET VAULT — 10 taps on hero title
+  ════════════════════════════════════════ */
+  function initVaultTrigger() {
+    const title = document.getElementById('heroTitle');
+    if (!title) return;
+    let taps = 0, resetTimer = null;
+    title.addEventListener('click', () => {
+      taps++;
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => { taps = 0; }, 4000);
+      title.style.transform = 'scale(0.96)';
+      setTimeout(() => { title.style.transform = ''; }, 120);
+      if (taps >= VAULT_CLICKS) { taps = 0; window.location.href = 'vault.html'; }
+    });
+  }
+
+  /* ── CURSOR GLOW ── */
+  function initCursorGlow() {
+    const glow = document.getElementById('cursorGlow');
+    if (!glow || window.matchMedia('(pointer:coarse)').matches) return;
+    document.addEventListener('mousemove', e => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+  }
+
+  /* ── MAGNETIC BUTTONS ── */
+  function initMagneticButtons() {
+    if (window.matchMedia('(pointer:coarse)').matches) return;
+    document.querySelectorAll('.btn-pink, .btn-purple').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width  / 2) * 0.28;
+        const y = (e.clientY - r.top  - r.height / 2) * 0.28;
+        btn.style.transform = `translate(${x}px,${y}px) scale(1.04)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+        btn.style.transition = 'transform .5s var(--ease-bounce)';
+        setTimeout(() => { btn.style.transition = ''; }, 500);
+      });
+      btn.addEventListener('mouseenter', () => { btn.style.transition = 'transform .1s linear'; });
+    });
+  }
+
+  /* ── 3D CARD TILT ── */
+  function initTiltCards() {
+    if (window.matchMedia('(pointer:coarse)').matches) return;
+    document.querySelectorAll('.tl-card, .stat-card, .adv-card, .fav-card').forEach(card => {
+      card.style.transformStyle = 'preserve-3d';
+      card.addEventListener('mouseenter', () => { card.style.transition = 'transform .08s linear, box-shadow .3s, border-color .3s'; });
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left)  / r.width  - 0.5;
+        const y = (e.clientY - r.top)   / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${x*10}deg) rotateX(${-y*10}deg) scale(1.03)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform .55s var(--ease-bounce), box-shadow .3s, border-color .3s';
+        card.style.transform  = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale(1)';
+      });
+    });
+  }
+
+  /* ── A: SCROLL PROGRESS BAR ── */
+  function initScrollProgress() {
+    const bar = document.getElementById('scrollProgress');
+    if (!bar) return;
+    window.addEventListener('scroll', () => {
+      const max = document.body.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
+    }, { passive:true });
+  }
+
+  /* ── B: HERO PARALLAX ── */
+  function initParallax() {
+    if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    const heroText  = document.querySelector('.hero-text');
+    const heroRings = document.querySelector('.hero-rings');
+    let raf = false;
+    window.addEventListener('scroll', () => {
+      if (!raf) { raf = true; requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (heroText  && y < window.innerHeight) heroText.style.transform  = `translateY(${y * .38}px)`;
+        if (heroRings && y < window.innerHeight) heroRings.style.transform = `translate(-50%,-50%) translateY(${y * .12}px)`;
+        raf = false;
+      }); }
+    }, { passive:true });
+  }
+
+  /* ── C: CHARACTER TEXT REVEAL ── */
+  function initCharReveal() {
+    document.querySelectorAll('.section-title').forEach(el => {
+      if (el.dataset.cr) return;
+      el.dataset.cr = '1';
+      const text = el.textContent;
+      el.innerHTML = [...text].map((ch, i) =>
+        `<span class="cr-char" style="transition-delay:${i * 40}ms">${ch === ' ' ? '&nbsp;' : ch}</span>`
+      ).join('');
+      const io = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          el.querySelectorAll('.cr-char').forEach(s => s.classList.add('cr-on'));
+          io.unobserve(el);
         }
+      }, { threshold: .5 });
+      io.observe(el);
+    });
+  }
 
-        // Initialize neon hearts
-        if (typeof createFloatingHearts === 'function') {
-            createFloatingHearts();
-        }
-    </script>
+  /* ── D: STAGGERED CARD CASCADE ── */
+  function initCardCascade() {
+    ['.polaroid', '.stat-card', '.adv-card', '.fav-card'].forEach(sel => {
+      document.querySelectorAll(sel).forEach((el, i) => el.classList.add(i % 2 === 0 ? 'cas-l' : 'cas-r'));
+    });
+  }
+
+  /* ── E: TIMELINE DRAW-IN ── */
+  function initTimelineDraw() {
+    const fill = document.getElementById('timelineFill');
+    const tl   = document.querySelector('.timeline');
+    if (!fill || !tl) return;
+    let raf = false;
+    const upd = () => {
+      if (!raf) { raf = true; requestAnimationFrame(() => {
+        const r = tl.getBoundingClientRect();
+        const pct = Math.max(0, Math.min(100, (window.innerHeight - r.top) / (r.height + window.innerHeight * .4) * 100));
+        fill.style.height = pct + '%';
+        raf = false;
+      }); }
+    };
+    window.addEventListener('scroll', upd, { passive:true });
+    upd();
+  }
+  </script>
+
 </body>
-
 </html>

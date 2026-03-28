@@ -1,145 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1a1a1a">
-    <title>Our Daily Adventure 💕</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Quicksand:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="tracker_styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#080812">
+  <title>Daily Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
+<body class="tracker-page">
 
-<body>
-    <!-- Floating hearts background -->
-    <div class="hearts-background"></div>
+  <!-- aurora background -->
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+    <div class="aurora-orb aurora-orb-4"></div>
+  </div>
 
-    <!-- Main container -->
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="title">
-                <span class="emoji-bounce">🌟</span>
-                Our Daily Adventure
-                <span class="emoji-bounce delay">💕</span>
-            </h1>
-            <p class="subtitle">Keeping our love strong, one day at a time</p>
-        </header>
+  <!-- cursor glow -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-        <!-- Cute couple animation -->
-        <div class="couple-animation">
-            <div class="couple-emoji">👫</div>
-            <div class="connection-line"></div>
-        </div>
+  <!-- hearts-background kept for compatibility with tracker_script.js -->
+  <div class="hearts-background" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;"></div>
 
-        <!-- Day display -->
-        <div class="day-display">
-            <p class="day-label">Today is</p>
-            <h2 class="day-name" id="dayName">Loading...</h2>
-            <p class="day-special" id="daySpecial"></p>
-        </div>
+  <!-- STICKY HEADER -->
+  <header class="tracker-bar">
+    <div class="tracker-bar-inner">
+      <span class="tracker-logo">Daily Adventure</span>
+      <a href="index.html" class="home-link">&#8592; Home</a>
+    </div>
+  </header>
 
-        <!-- Activity card -->
-        <div class="activity-card" id="activityCard">
-            <div class="card-header">
-                <span class="activity-emoji" id="activityEmoji">✨</span>
-                <h3 class="activity-title" id="activityTitle">Loading activity...</h3>
-            </div>
+  <!-- MAIN -->
+  <main class="tracker-main">
 
-            <div class="card-body">
-                <p class="activity-description" id="activityDescription"></p>
-
-                <div class="activity-meta">
-                    <div class="meta-item">
-                        <span class="meta-icon">⏱️</span>
-                        <span class="meta-text" id="activityTime"></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-icon">📊</span>
-                        <span class="meta-text" id="activityDifficulty"></span>
-                    </div>
-                </div>
-
-                <div class="activity-materials">
-                    <p class="materials-label">You'll need:</p>
-                    <ul class="materials-list" id="materialsList"></ul>
-                </div>
-
-                <div class="activity-tips" id="tipsSection">
-                    <p class="tips-icon">💡</p>
-                    <p class="tips-text" id="tipsText"></p>
-                </div>
-            </div>
-
-            <div class="card-actions">
-                <button class="btn btn-complete" id="completeBtn">
-                    <span class="btn-icon">✓</span>
-                    Complete
-                </button>
-                <button class="btn btn-skip" id="skipBtn">
-                    <span class="btn-icon">→</span>
-                    Skip
-                </button>
-            </div>
-        </div>
-
-        <!-- Progress section -->
-        <div class="progress-section">
-            <div class="stat-card">
-                <div class="stat-icon">🔥</div>
-                <div class="stat-content">
-                    <p class="stat-label">Current Streak</p>
-                    <p class="stat-value" id="streakValue">0 days</p>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">✨</div>
-                <div class="stat-content">
-                    <p class="stat-label">Completed</p>
-                    <p class="stat-value" id="completedValue">0 activities</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation buttons -->
-        <div class="nav-buttons">
-            <button class="nav-btn" id="historyBtn">
-                <span class="nav-icon">📜</span>
-                View History
-            </button>
-        </div>
+    <!-- Day badge -->
+    <div class="day-pill">
+      <div class="day-pill-inner">
+        <span>Today is</span>
+        <strong id="dayName">&#8230;</strong>
+      </div>
+      <span class="day-special-tag" id="daySpecial"></span>
     </div>
 
-    <!-- Celebration overlay (hidden by default) -->
-    <div class="celebration-overlay" id="celebrationOverlay">
-        <div class="celebration-content">
-            <h2 class="celebration-title">Amazing! 🎉</h2>
-            <p class="celebration-message">You completed today's activity!</p>
-            <div class="celebration-emoji">💕✨🎊</div>
-        </div>
+    <!-- Activity Card -->
+    <div class="act-card" id="activityCard">
+
+      <div class="act-emoji-ring">
+        <span class="act-emoji" id="activityEmoji"></span>
+      </div>
+
+      <h2 class="act-title" id="activityTitle">Loading&#8230;</h2>
+      <p class="act-desc"  id="activityDescription"></p>
+
+      <!-- Meta chips -->
+      <div class="act-chips">
+        <span class="chip" id="activityTime"></span>
+        <span class="chip" id="activityDifficulty"></span>
+      </div>
+
+      <!-- Materials -->
+      <div class="act-materials">
+        <p class="act-materials-label">You will need</p>
+        <ul id="materialsList"></ul>
+      </div>
+
+      <!-- Tips -->
+      <div class="act-tips">
+        <span class="act-tips-icon">Tip</span>
+        <p id="tipsText"></p>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="act-actions">
+        <button class="btn-complete" id="completeBtn">Complete</button>
+        <button class="btn-skip"    id="skipBtn">Next Idea</button>
+      </div>
+
     </div>
 
-    <!-- History modal (hidden by default) -->
-    <div class="modal" id="historyModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Activity History</h3>
-                <button class="modal-close" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body" id="historyList">
-                <!-- History items will be inserted here -->
-            </div>
-        </div>
+    <!-- Stats row -->
+    <div class="stats-row">
+      <div class="t-stat">
+        <img src="https://picsum.photos/seed/streak/60/60" alt="" class="t-stat-img" aria-hidden="true">
+        <span class="t-stat-num"   id="streakValue">0 days</span>
+        <span class="t-stat-label">Current Streak</span>
+      </div>
+      <div class="t-stat">
+        <img src="https://picsum.photos/seed/done/60/60" alt="" class="t-stat-img" aria-hidden="true">
+        <span class="t-stat-num"   id="completedValue">0 activities</span>
+        <span class="t-stat-label">Completed</span>
+      </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="activities.js"></script>
-    <script src="tracker_script.js"></script>
+    <!-- History -->
+    <div class="hist-btn-wrap">
+      <button class="btn btn-ghost" id="historyBtn">View History</button>
+    </div>
+
+  </main>
+
+  <!-- CELEBRATION OVERLAY -->
+  <div class="celebration-overlay" id="celebrationOverlay">
+    <div class="cel-box">
+      <div class="cel-img-wrap">
+        <img src="https://picsum.photos/seed/celebrate/200/200" alt="Celebration" class="cel-img">
+      </div>
+      <h2 class="cel-title">Amazing!</h2>
+      <p class="cel-msg">You completed today's activity.<br>Your bond gets stronger every day.</p>
+      <button class="btn btn-pink btn-sm" onclick="document.getElementById('celebrationOverlay').classList.remove('show')">
+        Wonderful!
+      </button>
+    </div>
+  </div>
+
+  <!-- HISTORY MODAL (bottom sheet) -->
+  <div class="history-modal" id="historyModal">
+    <div class="hist-sheet">
+      <div class="hist-handle"></div>
+      <div class="hist-header">
+        <h3 class="hist-title">Activity History</h3>
+        <button class="close-btn" id="closeModal" aria-label="Close">&#215;</button>
+      </div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="activities.js"></script>
+  <script src="tracker_script.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    /* cursor glow */
+    const glow = document.getElementById('cursorGlow');
+    if (glow && !window.matchMedia('(pointer:coarse)').matches) {
+      document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top  = e.clientY + 'px';
+      });
+    }
+    /* magnetic complete button */
+    const btn = document.getElementById('completeBtn');
+    if (btn && !window.matchMedia('(pointer:coarse)').matches) {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        btn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.22}px) scale(1.04)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    }
+  });
+  </script>
+
 </body>
-
 </html>

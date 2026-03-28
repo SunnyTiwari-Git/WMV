@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Private Space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="vault-content-page">
+
+  <div class="aurora" aria-hidden="true">
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+    <div class="aurora-orb aurora-orb-4"></div>
+  </div>
+
+  <!-- top bar -->
+  <header class="vault-topbar">
+    <span class="vault-brand">Our Private Space</span>
+    <button class="vault-logout" id="logoutBtn">Lock &amp; Leave</button>
+  </header>
+
+  <!-- hero -->
+  <div class="vault-hero">
+    <h1>Just For Us</h1>
+    <p>This space is private, personal, and only ours.</p>
+  </div>
+
+  <!-- ── TWO BIG ENTRY CARDS ── -->
+  <div class="vault-cards-row">
+
+    <!-- Intimate Photos Card -->
+    <div class="vault-entry-card" id="openPhotos" role="button" tabindex="0" aria-expanded="false">
+      <img src="https://picsum.photos/seed/intimate-photos/600/800" alt="">
+      <div class="vault-entry-label">
+        <div class="vault-entry-icon">
+          <!-- camera icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8
+                     a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+        </div>
+        <span class="vault-entry-title">Intimate Photos</span>
+        <span class="vault-entry-count">Add your photos</span>
+        <span class="expand-hint">Tap to view</span>
+      </div>
+    </div>
+
+    <!-- Intimate Videos Card -->
+    <div class="vault-entry-card" id="openVideos" role="button" tabindex="0" aria-expanded="false">
+      <img src="https://picsum.photos/seed/intimate-videos/600/800" alt="">
+      <div class="vault-entry-label">
+        <div class="vault-entry-icon">
+          <!-- play icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="10 8 16 12 10 16 10 8" fill="white" stroke="none"></polygon>
+          </svg>
+        </div>
+        <span class="vault-entry-title">Intimate Videos</span>
+        <span class="vault-entry-count">Add your videos</span>
+        <span class="expand-hint">Tap to view</span>
+      </div>
+    </div>
+
+  </div><!-- /vault-cards-row -->
+
+  <!-- ══════════════════════════════════════
+       PHOTOS SECTION (revealed on click)
+  ═══════════════════════════════════════ -->
+  <section class="vault-section" id="photosSection">
+    <div class="vault-section-header">
+      <h2 class="vault-section-title">Intimate Photos</h2>
+      <button class="vault-close-section" id="closePhotos">Close</button>
+    </div>
+
+    <div class="vault-photo-grid" id="photoGrid">
+      <!-- 18 placeholder photos — replace src with your real images -->
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip1/600/800"><img src="https://picsum.photos/seed/ip1/600/800" alt="Photo 1"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip2/600/900"><img src="https://picsum.photos/seed/ip2/600/900" alt="Photo 2"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip3/500/700"><img src="https://picsum.photos/seed/ip3/500/700" alt="Photo 3"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip4/600/600"><img src="https://picsum.photos/seed/ip4/600/600" alt="Photo 4"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip5/700/900"><img src="https://picsum.photos/seed/ip5/700/900" alt="Photo 5"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip6/500/650"><img src="https://picsum.photos/seed/ip6/500/650" alt="Photo 6"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip7/600/800"><img src="https://picsum.photos/seed/ip7/600/800" alt="Photo 7"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip8/500/600"><img src="https://picsum.photos/seed/ip8/500/600" alt="Photo 8"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip9/700/800"><img src="https://picsum.photos/seed/ip9/700/800" alt="Photo 9"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip10/600/750"><img src="https://picsum.photos/seed/ip10/600/750" alt="Photo 10"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip11/550/800"><img src="https://picsum.photos/seed/ip11/550/800" alt="Photo 11"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip12/600/700"><img src="https://picsum.photos/seed/ip12/600/700" alt="Photo 12"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip13/500/800"><img src="https://picsum.photos/seed/ip13/500/800" alt="Photo 13"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip14/700/700"><img src="https://picsum.photos/seed/ip14/700/700" alt="Photo 14"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip15/600/850"><img src="https://picsum.photos/seed/ip15/600/850" alt="Photo 15"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip16/550/700"><img src="https://picsum.photos/seed/ip16/550/700" alt="Photo 16"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip17/600/800"><img src="https://picsum.photos/seed/ip17/600/800" alt="Photo 17"></div>
+      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip18/500/650"><img src="https://picsum.photos/seed/ip18/500/650" alt="Photo 18"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       VIDEOS SECTION (revealed on click)
+  ═══════════════════════════════════════ -->
+  <section class="vault-section" id="videosSection">
+    <div class="vault-section-header">
+      <h2 class="vault-section-title">Intimate Videos</h2>
+      <button class="vault-close-section" id="closeVideos">Close</button>
+    </div>
+
+    <div class="vault-video-grid" id="videoGrid">
+      <!-- 12 placeholder video thumbnails — replace src with your real thumbnails -->
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv1/640/360" alt="Video 1"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 01</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv2/640/360" alt="Video 2"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 02</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv3/640/360" alt="Video 3"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 03</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv4/640/360" alt="Video 4"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 04</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv5/640/360" alt="Video 5"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 05</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv6/640/360" alt="Video 6"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 06</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv7/640/360" alt="Video 7"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 07</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv8/640/360" alt="Video 8"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 08</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv9/640/360" alt="Video 9"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 09</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv10/640/360" alt="Video 10"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 10</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv11/640/360" alt="Video 11"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 11</div></div>
+      <div class="vault-video-item"><img src="https://picsum.photos/seed/iv12/640/360" alt="Video 12"><div class="vault-play-btn"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="white"></polygon></svg></div><div class="vault-video-label">Video 12</div></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="vault-lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&#215;</button>
+    <img src="" alt="Full size" id="lightboxImg">
+  </div>
+
+  <script>
+  /* ── Auth guard ── */
+  if (sessionStorage.getItem('vault_auth') !== '1') {
+    window.location.replace('vault.html');
+  }
+
+  /* ── Logout ── */
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    sessionStorage.removeItem('vault_auth');
+    window.location.href = 'index.html';
+  });
+
+  /* ── Open / Close photo section ── */
+  const openPhotos    = document.getElementById('openPhotos');
+  const photosSection = document.getElementById('photosSection');
+  const closePhotos   = document.getElementById('closePhotos');
+
+  openPhotos.addEventListener('click', () => {
+    photosSection.classList.add('open');
+    openPhotos.setAttribute('aria-expanded', 'true');
+    setTimeout(() => photosSection.scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+  });
+  openPhotos.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openPhotos.click(); });
+  closePhotos.addEventListener('click', () => {
+    photosSection.classList.remove('open');
+    openPhotos.setAttribute('aria-expanded', 'false');
+  });
+
+  /* ── Open / Close video section ── */
+  const openVideos    = document.getElementById('openVideos');
+  const videosSection = document.getElementById('videosSection');
+  const closeVideos   = document.getElementById('closeVideos');
+
+  openVideos.addEventListener('click', () => {
+    videosSection.classList.add('open');
+    openVideos.setAttribute('aria-expanded', 'true');
+    setTimeout(() => videosSection.scrollIntoView({ behavior:'smooth', block:'start' }), 50);
+  });
+  openVideos.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openVideos.click(); });
+  closeVideos.addEventListener('click', () => {
+    videosSection.classList.remove('open');
+    openVideos.setAttribute('aria-expanded', 'false');
+  });
+
+  /* ── Lightbox for photos ── */
+  const lightbox      = document.getElementById('lightbox');
+  const lightboxImg   = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.vault-photo-item').forEach(item => {
+    item.addEventListener('click', () => {
+      lightboxImg.src = item.dataset.src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lightboxImg.src = '';
+  }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
