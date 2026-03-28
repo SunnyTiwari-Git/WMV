@@ -453,7 +453,25 @@ section { position:relative; z-index:1; }
 .hb-heart:nth-of-type(3){ animation-delay:.7s; }
 .hb-heart:nth-of-type(4){ animation-delay:1s; }
 
-.hb-heart svg { width:22px; height:22px; filter:drop-shadow(0 0 8px var(--pink-glow)); }
+.hb-heart svg { width:48px; height:24px; filter:drop-shadow(0 0 8px var(--pink-glow)); }
+
+/* ── Centered ECG heartbeat line ── */
+.hero-ecg {
+  width:min(420px, 90vw); margin:2rem auto 0;
+  pointer-events:none; opacity:.8;
+}
+.ecg-svg { width:100%; height:auto; }
+.ecg-line {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: ecgDraw 2.2s var(--ease-smooth) infinite;
+}
+@keyframes ecgDraw {
+  0%   { stroke-dashoffset:800; opacity:1; }
+  70%  { stroke-dashoffset:0;   opacity:1; }
+  90%  { stroke-dashoffset:0;   opacity:0; }
+  100% { stroke-dashoffset:800; opacity:0; }
+}
 
 /* ripple rings */
 .hb-ripple {
@@ -1177,13 +1195,14 @@ section { position:relative; z-index:1; }
 
 /* ── Tablet portrait ≤ 768px ── */
 @media(max-width:768px){
-  /* Timeline: single-side */
-  .timeline::before { left:26px; }
+  /* Timeline: single left-side column */
+  .timeline::before { left:26px; transform:none; }
+  .timeline-fill    { left:26px; transform:none; }
   .tl-item, .tl-item:nth-child(even) {
     justify-content:flex-start; padding-right:0;
     padding-left:4.5rem; transform:translateX(-22px);
   }
-  .tl-dot { left:26px; }
+  .tl-dot { left:26px; transform:none; }
   .tl-card::after,
   .tl-item:nth-child(even) .tl-card::after { right:auto; left:-9px; transform:rotate(-135deg); }
 
@@ -1205,7 +1224,7 @@ section { position:relative; z-index:1; }
   .hb-heart-wrap:nth-child(3){ bottom:12%; left:4%;  }
   .hb-heart-wrap:nth-child(4){ bottom:12%; right:4%; }
   .hb-heart { width:28px; height:28px; }
-  .hb-heart svg { width:16px; height:16px; }
+  .hb-heart svg { width:36px; height:18px; }
   .hb-ripple { width:28px; height:28px; }
 }
 
@@ -1227,7 +1246,7 @@ section { position:relative; z-index:1; }
   .hb-heart-wrap:nth-child(1){ top:7%; left:3%; }
   .hb-heart-wrap:nth-child(2){ top:7%; right:3%; }
   .hb-heart { width:24px; height:24px; }
-  .hb-heart svg { width:14px; height:14px; }
+  .hb-heart svg { width:28px; height:14px; }
   .hb-ripple { width:24px; height:24px; }
 
   /* Carousel */

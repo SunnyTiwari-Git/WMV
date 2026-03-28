@@ -36,32 +36,6 @@
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-orb hero-orb-3"></div>
 
-    <!-- heartbeat ripple accents -->
-    <div class="hb-heart-wrap" aria-hidden="true">
-      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
-      <div class="hb-heart">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--pink)" stroke="none"/></svg>
-      </div>
-    </div>
-    <div class="hb-heart-wrap" aria-hidden="true">
-      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
-      <div class="hb-heart">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--purple)" stroke="none"/></svg>
-      </div>
-    </div>
-    <div class="hb-heart-wrap" aria-hidden="true">
-      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
-      <div class="hb-heart">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--teal)" stroke="none"/></svg>
-      </div>
-    </div>
-    <div class="hb-heart-wrap" aria-hidden="true">
-      <div class="hb-ripple"></div><div class="hb-ripple"></div><div class="hb-ripple"></div>
-      <div class="hb-heart">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="var(--pink)" stroke="none"/></svg>
-      </div>
-    </div>
-
     <!-- pulsing rings -->
     <div class="hero-rings" aria-hidden="true">
       <div class="hero-ring"></div>
@@ -77,6 +51,23 @@
       <div class="hero-btns">
         <a href="tracker.html" class="btn btn-pink">Start Today's Adventure</a>
         <a href="#story"       class="btn btn-outline">Our Story</a>
+      </div>
+
+      <!-- ECG heartbeat line under buttons -->
+      <div class="hero-ecg" aria-hidden="true">
+        <svg class="ecg-svg" viewBox="0 0 400 60" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ecgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="var(--pink)"   stop-opacity="0"/>
+              <stop offset="30%"  stop-color="var(--pink)"   stop-opacity="1"/>
+              <stop offset="60%"  stop-color="var(--purple)" stop-opacity="1"/>
+              <stop offset="100%" stop-color="var(--teal)"   stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <polyline class="ecg-line"
+            points="0,30 40,30 55,30 65,18 75,42 85,30 110,30 120,4 130,56 140,30 165,30 175,22 185,38 195,30 400,30"
+            stroke="url(#ecgGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
     </div>
 
