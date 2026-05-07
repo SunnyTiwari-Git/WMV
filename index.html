@@ -624,6 +624,18 @@
   </footer>
 
   <!-- ════════════════════════════════════
+       MISSING YOU COMPONENT
+  ═══════════════════════════════════════ -->
+  <button class="missing-you-btn" id="missingYouBtn" aria-label="I miss you">
+    💕 Missing You
+  </button>
+
+  <div class="missing-toast" id="missingToast" aria-hidden="true">
+    <h3 class="missing-toast-title">💌 Note to you</h3>
+    <p class="missing-toast-msg" id="missingToastMsg"></p>
+  </div>
+
+  <!-- ════════════════════════════════════
        SCRIPTS
   ═══════════════════════════════════════ -->
   <script>
@@ -646,6 +658,7 @@
     initCharReveal();
     initCardCascade();
     initTimelineDraw();
+    initMissingYou();
   });
 
   /* ── SCROLL REVEALS ── */
@@ -796,9 +809,12 @@
   function initCursorGlow() {
     const glow = document.getElementById('cursorGlow');
     if (!glow || window.matchMedia('(pointer:coarse)').matches) return;
+    let frame;
     document.addEventListener('mousemove', e => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
+      if (frame) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        glow.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+      });
     });
   }
 
@@ -844,9 +860,17 @@
   function initScrollProgress() {
     const bar = document.getElementById('scrollProgress');
     if (!bar) return;
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const max = document.body.scrollHeight - window.innerHeight;
-      bar.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const max = document.body.scrollHeight - window.innerHeight;
+          const progress = max > 0 ? window.scrollY / max : 0;
+          bar.style.transform = `scaleX(${progress})`;
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive:true });
   }
 
@@ -892,6 +916,42 @@
     });
   }
 
+  /* ── F: MISSING YOU BUTTON ── */
+  function initMissingYou() {
+    const btn = document.getElementById('missingYouBtn');
+    const toast = document.getElementById('missingToast');
+    const msgEl = document.getElementById('missingToastMsg');
+    if (!btn || !toast || !msgEl) return;
+
+    const messages = [
+      "I'm missing you so much right now. Sending you a big virtual hug! 🫂",
+      "Just thought you should know you're on my mind. Love you! 💕",
+      "I wish you were here next to me. Counting down the days! ⏳",
+      "Thinking about your smile and it's making me smile too. 😊",
+      "Even though we're apart, you hold my heart. I miss you! ❤️",
+      "My day is always better when I think of you. Miss you tons! 🌸",
+      "I just wanted to send a little reminder that I love you deeply! 💌",
+      "Distance means so little when someone means so much. 🌍❤️",
+      "I was just thinking about our favorite memories... can't wait to make more! ✨"
+    ];
+
+    let toastTimer;
+    btn.addEventListener('click', () => {
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      msgEl.textContent = randomMsg;
+
+      // pop button
+      btn.style.transform = 'scale(0.9)';
+      setTimeout(() => btn.style.transform = '', 150);
+
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4500); // Hide after 4.5s
+    });
+  }
+
   /* ── E: TIMELINE DRAW-IN ── */
   function initTimelineDraw() {
     const fill = document.getElementById('timelineFill');
@@ -901,8 +961,8 @@
     const upd = () => {
       if (!raf) { raf = true; requestAnimationFrame(() => {
         const r = tl.getBoundingClientRect();
-        const pct = Math.max(0, Math.min(100, (window.innerHeight - r.top) / (r.height + window.innerHeight * .4) * 100));
-        fill.style.height = pct + '%';
+        const pct = Math.max(0, Math.min(1, (window.innerHeight - r.top) / (r.height + window.innerHeight * .4)));
+        fill.style.transform = `translateX(-50%) scaleY(${pct})`;
         raf = false;
       }); }
     };

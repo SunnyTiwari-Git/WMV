@@ -77,30 +77,19 @@
   ═══════════════════════════════════════ -->
   <section class="vault-section" id="photosSection">
     <div class="vault-section-header">
-      <h2 class="vault-section-title">Intimate Photos</h2>
+      <div style="display:flex; align-items:center;">
+        <h2 class="vault-section-title">Intimate Photos</h2>
+        <label class="vault-upload-btn" for="photoUpload" aria-label="Upload Photo">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Upload
+        </label>
+        <input type="file" id="photoUpload" class="vault-upload-input" accept="image/*">
+      </div>
       <button class="vault-close-section" id="closePhotos">Close</button>
     </div>
 
     <div class="vault-photo-grid" id="photoGrid">
-      <!-- 18 placeholder photos — replace src with your real images -->
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip1/600/800"><img src="https://picsum.photos/seed/ip1/600/800" alt="Photo 1"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip2/600/900"><img src="https://picsum.photos/seed/ip2/600/900" alt="Photo 2"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip3/500/700"><img src="https://picsum.photos/seed/ip3/500/700" alt="Photo 3"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip4/600/600"><img src="https://picsum.photos/seed/ip4/600/600" alt="Photo 4"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip5/700/900"><img src="https://picsum.photos/seed/ip5/700/900" alt="Photo 5"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip6/500/650"><img src="https://picsum.photos/seed/ip6/500/650" alt="Photo 6"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip7/600/800"><img src="https://picsum.photos/seed/ip7/600/800" alt="Photo 7"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip8/500/600"><img src="https://picsum.photos/seed/ip8/500/600" alt="Photo 8"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip9/700/800"><img src="https://picsum.photos/seed/ip9/700/800" alt="Photo 9"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip10/600/750"><img src="https://picsum.photos/seed/ip10/600/750" alt="Photo 10"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip11/550/800"><img src="https://picsum.photos/seed/ip11/550/800" alt="Photo 11"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip12/600/700"><img src="https://picsum.photos/seed/ip12/600/700" alt="Photo 12"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip13/500/800"><img src="https://picsum.photos/seed/ip13/500/800" alt="Photo 13"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip14/700/700"><img src="https://picsum.photos/seed/ip14/700/700" alt="Photo 14"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip15/600/850"><img src="https://picsum.photos/seed/ip15/600/850" alt="Photo 15"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip16/550/700"><img src="https://picsum.photos/seed/ip16/550/700" alt="Photo 16"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip17/600/800"><img src="https://picsum.photos/seed/ip17/600/800" alt="Photo 17"></div>
-      <div class="vault-photo-item" data-src="https://picsum.photos/seed/ip18/500/650"><img src="https://picsum.photos/seed/ip18/500/650" alt="Photo 18"></div>
+      <!-- Photos will be loaded dynamically via JS -->
     </div>
   </section>
 
@@ -148,6 +137,111 @@
     window.location.href = 'index.html';
   });
 
+  /* ── Custom Photo Upload Logic ── */
+  const photoUpload = document.getElementById('photoUpload');
+  const photoGrid = document.getElementById('photoGrid');
+  const MAX_PHOTOS = 10;
+
+  // Default placeholder images
+  const defaultPhotos = [
+    "https://picsum.photos/seed/ip1/600/800",
+    "https://picsum.photos/seed/ip2/600/900",
+    "https://picsum.photos/seed/ip3/500/700",
+    "https://picsum.photos/seed/ip4/600/600"
+  ];
+
+  function loadPhotos() {
+    let savedPhotos = [];
+    try {
+      savedPhotos = JSON.parse(localStorage.getItem('vault_custom_photos') || '[]');
+    } catch(e) {
+      console.error('Error reading saved photos', e);
+    }
+
+    photoGrid.innerHTML = '';
+    const photosToRender = savedPhotos.length > 0 ? savedPhotos : defaultPhotos;
+
+    photosToRender.forEach((src, idx) => {
+      renderPhotoItem(src, idx);
+    });
+  }
+
+  function renderPhotoItem(src, id) {
+    const div = document.createElement('div');
+    div.className = 'vault-photo-item';
+    div.dataset.src = src;
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Photo ' + (id + 1);
+
+    div.appendChild(img);
+
+    // Setup lightbox click
+    div.addEventListener('click', () => {
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Add delete overlay if it's a custom photo (not a placeholder)
+    let savedPhotos = [];
+    try { savedPhotos = JSON.parse(localStorage.getItem('vault_custom_photos') || '[]'); } catch(e){}
+
+    if (savedPhotos.length > 0) {
+      const delBtn = document.createElement('div');
+      delBtn.className = 'photo-overlay';
+      delBtn.innerHTML = '<span style="color:white; font-size:1.5rem; background:rgba(0,0,0,0.5); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center;">&times;</span>';
+
+      delBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent lightbox
+        if (confirm('Delete this photo?')) {
+          savedPhotos.splice(id, 1);
+          localStorage.setItem('vault_custom_photos', JSON.stringify(savedPhotos));
+          loadPhotos();
+        }
+      });
+      div.appendChild(delBtn);
+    }
+
+    photoGrid.appendChild(div);
+  }
+
+  photoUpload.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    let savedPhotos = [];
+    try {
+      savedPhotos = JSON.parse(localStorage.getItem('vault_custom_photos') || '[]');
+    } catch(e) {}
+
+    if (savedPhotos.length >= MAX_PHOTOS) {
+      alert(`You can only save up to ${MAX_PHOTOS} custom photos in the browser.`);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Src = event.target.result;
+      savedPhotos.push(base64Src);
+      try {
+        localStorage.setItem('vault_custom_photos', JSON.stringify(savedPhotos));
+        loadPhotos();
+      } catch(err) {
+        // e.g. quota exceeded
+        alert('Could not save photo. The image might be too large or your browser storage is full.');
+        savedPhotos.pop();
+      }
+    };
+    reader.readAsDataURL(file);
+    // Reset input
+    photoUpload.value = '';
+  });
+
+  // Load photos on initialization
+  loadPhotos();
+
   /* ── Open / Close photo section ── */
   const openPhotos    = document.getElementById('openPhotos');
   const photosSection = document.getElementById('photosSection');
@@ -185,13 +279,7 @@
   const lightboxImg   = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
 
-  document.querySelectorAll('.vault-photo-item').forEach(item => {
-    item.addEventListener('click', () => {
-      lightboxImg.src = item.dataset.src;
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-  });
+  // Lightbox click event is now attached dynamically in renderPhotoItem
 
   function closeLightbox() {
     lightbox.classList.remove('open');

@@ -157,11 +157,11 @@ button { font-family:inherit; }
    ============================================= */
 .cursor-glow {
   position:fixed; pointer-events:none; z-index:9999;
+  top:0; left:0;
   width:400px; height:400px; border-radius:50%;
   background:radial-gradient(circle,rgba(255,107,157,.08),transparent 65%);
-  transform:translate(-50%,-50%);
-  transition:left .08s linear, top .08s linear;
-  will-change:left,top;
+  transform:translate3d(-50%,-50%,0);
+  will-change:transform;
 }
 
 /* =============================================
@@ -289,11 +289,13 @@ section { position:relative; z-index:1; }
    ============================================= */
 #scrollProgress {
   position:fixed; top:0; left:0; z-index:10000;
-  height:3px; width:0%;
+  height:3px; width:100%;
+  transform:scaleX(0);
+  transform-origin:left;
   background:linear-gradient(90deg, var(--pink), var(--purple), var(--teal));
   box-shadow:0 0 14px var(--pink-glow), 0 0 28px var(--purple-glow);
   pointer-events:none; border-radius:0 3px 3px 0;
-  will-change:width;
+  will-change:transform;
 }
 
 /* =============================================
@@ -301,13 +303,14 @@ section { position:relative; z-index:1; }
    ============================================= */
 .timeline-fill {
   position:absolute; left:50%; top:0;
-  transform:translateX(-50%);
-  width:2px; height:0%;
+  transform:translateX(-50%) scaleY(0);
+  transform-origin:top;
+  width:2px; height:100%;
   background:linear-gradient(to bottom,var(--pink),var(--purple),var(--teal));
   border-radius:var(--r-full);
   box-shadow:0 0 14px var(--pink-glow);
   z-index:3; pointer-events:none;
-  will-change:height;
+  will-change:transform;
 }
 
 /* =============================================
@@ -838,6 +841,57 @@ section { position:relative; z-index:1; }
 .fav-body  { padding:.9rem 1.1rem 1.1rem; }
 .fav-cat   { font-size:.7rem; font-weight:800; color:var(--purple-light); text-transform:uppercase; letter-spacing:.09em; margin-bottom:.35rem; }
 .fav-name  { font-family:'Dancing Script',cursive; font-size:1.3rem; color:var(--t1); }
+
+/* =============================================
+   MISSING YOU BUTTON & TOAST
+   ============================================= */
+.missing-you-btn {
+  position:fixed; bottom:2rem; right:2rem; z-index:9000;
+  background:var(--grad-pink); color:var(--white);
+  border:none; border-radius:var(--r-full); padding:1rem 1.5rem;
+  font-size:1.1rem; font-weight:700; cursor:pointer;
+  box-shadow:var(--glow-pink-md); transition:var(--t-b);
+  display:flex; align-items:center; gap:0.6rem;
+  font-family:'Inter','Quicksand',sans-serif;
+}
+.missing-you-btn:hover { transform:translateY(-4px) scale(1.05); box-shadow:var(--glow-pink-lg); }
+.missing-you-btn:active { transform:scale(0.95); }
+
+.missing-toast {
+  position:fixed; bottom:6rem; right:2rem; z-index:9001;
+  background:var(--glass); backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid var(--pink); border-radius:var(--r-lg);
+  padding:1.2rem 1.5rem; max-width:320px;
+  box-shadow:var(--shadow-card), 0 0 30px var(--pink-glow);
+  transform:translateY(20px) scale(0.9); opacity:0; pointer-events:none;
+  transition:all 0.4s var(--ease-bounce);
+}
+.missing-toast.show {
+  transform:translateY(0) scale(1); opacity:1; pointer-events:auto;
+}
+.missing-toast-title {
+  font-family:'Dancing Script',cursive; font-size:1.6rem; color:var(--pink-light);
+  margin-bottom:0.3rem; display:flex; align-items:center; gap:0.5rem;
+}
+.missing-toast-msg { font-size:0.9rem; color:var(--t1); line-height:1.4; }
+
+/* =============================================
+   CUSTOM UPLOAD BUTTONS
+   ============================================= */
+.vault-upload-btn {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  background:rgba(255,107,157,.15); color:var(--pink);
+  border:1px solid rgba(255,107,157,.3);
+  padding:0.6rem 1.2rem; border-radius:var(--r-full);
+  font-size:0.9rem; font-weight:700; cursor:pointer;
+  transition:var(--t); font-family:'Inter','Quicksand',sans-serif;
+  margin-left:1rem;
+}
+.vault-upload-btn:hover {
+  background:rgba(255,107,157,.25); border-color:var(--pink);
+  transform:translateY(-2px);
+}
+.vault-upload-input { display:none; }
 
 /* =============================================
    FOOTER
